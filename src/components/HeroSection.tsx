@@ -9,7 +9,7 @@ const HeroSection = () => {
         {/* Left Content */}
         <div className="md:w-1/4 space-y-6">
           <h1 className="text-2xl md:text-3xl font-sharp leading-tight">
-            Enter the Future with <br />BFM Academy's WEB3 <br /> Master-course
+            Enter the Future with <br />BFM Academy&apos;s WEB3 <br /> Master-course
           </h1>
 
           {/* Price Info */}

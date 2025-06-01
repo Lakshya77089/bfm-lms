@@ -14,7 +14,7 @@ const SectionThree = () => {
   return (
     <section className="bg-white text-center py-16 px-4 sm:px-6 md:py-20">
       <h2 className="text-3xl sm:text-4xl md:text-5xl font-sharp text-[#1b1b1f] mb-10 sm:mb-12">
-        What You'll Learn
+        What You&apos;ll Learn
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-6xl mx-auto relative">

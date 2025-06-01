@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-
+import Image from 'next/image';
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
