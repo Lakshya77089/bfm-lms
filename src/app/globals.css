@@ -145,3 +145,94 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .feature-card {
+    @apply relative flex items-start gap-4 p-6 bg-[#1d1dff] rounded-xl shadow-lg;
+  }
+
+  /* Top Connectors */
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 50px;
+    background-color: #1d1dff;
+    border-radius: 0 0 9999px 9999px;
+    z-index: 1;
+    display: none;
+  }
+
+  .feature-card:nth-child(n+3)::before {
+    display: block;
+  }
+
+  /* Bottom Connectors */
+  .feature-card::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 50px;
+    background-color: #1d1dff;
+    border-radius: 9999px 9999px 0 0;
+    z-index: 1;
+    display: none;
+  }
+
+  .feature-card:not(:nth-last-child(-n+2))::after {
+    display: block;
+  }
+
+  /* Horizontal Connectors - Right side of odd-numbered cards */
+  .feature-card:nth-child(odd):not(:nth-last-child(-n+1))::after {
+    content: '';
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0px;
+    height: 30px;
+    background-color: #1d1dff;
+    border-radius: 0 9999px 9999px 0;
+    z-index: 1;
+    display: block;
+  }
+
+  /* Horizontal Connectors - Left side of even-numbered cards */
+  .feature-card:nth-child(even)::before {
+    content: '';
+    position: absolute;
+    left: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 30px;
+    background-color: #1d1dff;
+    border-radius: 9999px 0 0 9999px;
+    z-index: 1;
+    display: block;
+  }
+
+  /* MEDIA QUERY: MOBILE MEIN CONNECTORS HIDE KARNE KE LIYE */
+  @media (max-width: 640px) { /* sm breakpoint ke liye, ya apne project ke hisab se adjust kar sakte ho */
+    .feature-card::before,
+    .feature-card::after {
+      display: none !important;
+    }
+  }
+}
+
+@font-face {
+  font-family: 'MyFont-Regular';
+  src: url('/fonts/SharpGrotesk-Black25.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+

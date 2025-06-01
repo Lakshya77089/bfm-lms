@@ -29,7 +29,7 @@ const items = [
 const SectionFour = () => {
   return (
     <section className="bg-white text-center py-20 px-4">
-      <h2 className="text-3xl md:text-5xl font-semibold text-[#1b1b1f] mb-12">
+      <h2 className="text-3xl md:text-5xl font-sharp text-[#1b1b1f] mb-12">
         What You’ll Get
       </h2>
       <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
@@ -38,7 +38,7 @@ const SectionFour = () => {
             key={idx}
             className="bg-gray-100 rounded-xl p-8 text-left shadow"
           >
-            <h3 className="text-xl text-black font-medium mb-2">
+            <h3 className="text-xl text-black font-sharp mb-2">
               {item.title}
             </h3>
             <p className="text-gray-600 mb-4">{item.description}</p>

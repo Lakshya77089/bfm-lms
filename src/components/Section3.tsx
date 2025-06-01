@@ -1,67 +1,97 @@
-// File: components/SectionThree.jsx
-"use client";
+'use client';
 
 import React from 'react';
-import { FaUniversity, FaWallet, FaCode, FaRocket, FaGlobe, FaMagic } from 'react-icons/fa';
-
-const features = [
-  {
-    icon: <FaUniversity size={30} />,
-    title: 'Foundations of Web3 & Blockchain',
-    description: 'Grasp the core principles of blockchain technology and the Web3 revolution.',
-  },
-  {
-    icon: <FaWallet size={30} />,
-    title: 'Crypto, Wallets & DeFi Essentials',
-    description: 'Understand how cryptocurrencies, wallets, and decentralized finance work.',
-  },
-  {
-    icon: <FaCode size={30} />,
-    title: 'Smart Contracts & dApps',
-    description: 'Learn to build and deploy smart contracts and decentralized applications.',
-  },
-  {
-    icon: <FaRocket size={30} />,
-    title: 'Tokenomics & Launch Strategies',
-    description: 'Master token design, launch frameworks, and ecosystem growth tactics.',
-  },
-  {
-    icon: <FaGlobe size={30} />,
-    title: 'DAOs, DePIN & Real-World Assets',
-    description: 'Explore decentralized organizations and physical infrastructure networks.',
-  },
-  {
-    icon: <FaMagic size={30} />,
-    title: 'AI x Web3 Integration & Startup Playbook',
-    description: 'Learn how to integrate AI into Web3 and build in the decentralized era.',
-  },
-];
+import {
+  FaUniversity,
+  FaWallet,
+  FaCode,
+  FaRocket,
+  FaGlobe,
+  FaMagic,
+} from 'react-icons/fa';
 
 const SectionThree = () => {
   return (
-    <section className="bg-white text-center py-20 px-4">
-      <h2 className="text-3xl md:text-5xl font-semibold text-[#1b1b1f] mb-12">
-        What You’ll Learn
+    <section className="bg-white text-center py-16 px-4 sm:px-6 md:py-20">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-sharp text-[#1b1b1f] mb-10 sm:mb-12">
+        What You'll Learn
       </h2>
-      <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-        {features.map((feature, index) => (
-          <div
-            key={index}
-            className="puzzle-piece bg-[#1d1dff] text-white rounded-xl p-6 flex gap-4 items-start shadow-lg"
-          >
-            <div className="mt-1 text-white">{feature.icon}</div>
-            <div className="text-left">
-              <h3 className="font-semibold text-md md:text-lg">{feature.title}</h3>
-              <p className="text-sm md:text-base opacity-80 mt-1">{feature.description}</p>
-            </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-6xl mx-auto relative">
+        <div className="feature-card flex items-start space-x-4 px-4 py-3 sm:px-6">
+          <FaUniversity size={30} className="text-white flex-shrink-0" />
+          <div>
+            <h3 className="font-sharp text-left text-white text-md sm:text-lg">
+              Foundations of Web3 & Blockchain
+            </h3>
+            <p className="text-sm sm:text-base text-white/80 text-left mt-1">
+              Grasp the core principles of blockchain technology and the Web3 revolution.
+            </p>
           </div>
-        ))}
+        </div>
+
+        <div className="feature-card flex items-start space-x-4 px-4 py-3 sm:px-6">
+          <FaWallet size={30} className="text-white flex-shrink-0" />
+          <div>
+            <h3 className="font-sharp text-left text-white text-md sm:text-lg">
+              Crypto, Wallets & DeFi Essentials
+            </h3>
+            <p className="text-sm sm:text-base text-white/80 text-left mt-1">
+              Understand how cryptocurrencies, wallets, and decentralized finance work.
+            </p>
+          </div>
+        </div>
+
+        <div className="feature-card flex items-start space-x-4 px-4 py-3 sm:px-6">
+          <FaCode size={30} className="text-white flex-shrink-0" />
+          <div>
+            <h3 className="font-sharp text-left text-white text-md sm:text-lg">
+              Smart Contracts & dApps
+            </h3>
+            <p className="text-sm sm:text-base text-white/80 text-left mt-1">
+              Learn to build and deploy smart contracts and decentralized applications.
+            </p>
+          </div>
+        </div>
+
+        <div className="feature-card flex items-start space-x-4 px-4 py-3 sm:px-6">
+          <FaRocket size={30} className="text-white flex-shrink-0" />
+          <div>
+            <h3 className="font-sharp text-left text-white text-md sm:text-lg">
+              Tokenomics & Launch Strategies
+            </h3>
+            <p className="text-sm sm:text-base text-white/80 text-left mt-1">
+              Master token design, launch frameworks, and ecosystem growth tactics.
+            </p>
+          </div>
+        </div>
+
+        <div className="feature-card flex items-start space-x-4 px-4 py-3 sm:px-6">
+          <FaGlobe size={30} className="text-white flex-shrink-0" />
+          <div>
+            <h3 className="font-sharp text-left text-white text-md sm:text-lg">
+              DAOs, DePIN & Real-World Assets
+            </h3>
+            <p className="text-sm sm:text-base text-white/80 text-left mt-1">
+              Explore decentralized organizations and physical infrastructure networks.
+            </p>
+          </div>
+        </div>
+
+        <div className="feature-card flex items-start space-x-4 px-4 py-3 sm:px-6">
+          <FaMagic size={30} className="text-white flex-shrink-0" />
+          <div>
+            <h3 className="font-sharp text-left text-white text-md sm:text-lg">
+              AI x Web3 Integration & Startup Playbook
+            </h3>
+            <p className="text-sm sm:text-base text-white/80 text-left mt-1">
+              Learn how to integrate AI into Web3 and build in the decentralized era.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
 };
 
 export default SectionThree;
-
-
-
