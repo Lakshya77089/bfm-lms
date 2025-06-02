@@ -8,14 +8,14 @@ const HeroSection = () => {
       <div className="flex flex-col md:flex-row items-center justify-between gap-8">
         {/* Left Content */}
         <div className="md:w-1/4 space-y-6">
-          <h1 className="text-2xl md:text-3xl font-sharp leading-tight">
+          <h1 style={{fontFamily:'SharpGrotesk-Book25'}} className="text-xl md:text-2xl font-sharp">
             Enter the Future with <br />BFM Academy&apos;s WEB3 <br /> Master-course
           </h1>
 
           {/* Price Info */}
         <div>
-  <p className="text-xl md:text-3xl font-bold">2000 <span className="text-sm font-normal">USD</span></p>
-  <p style={{ fontSize: '2.25rem', fontWeight: 'bold', color: '#9CA3AF', marginTop: '-0.5rem' }}>
+  <p  className="text-xl md:text-3xl font-sharp">2000 <span className="text-sm font-normal">USD</span></p>
+  <p style={{ fontSize: '2.25rem', fontWeight: 'sharp', color: '#9CA3AF', marginTop: '-0.5rem' }}>
     <span style={{ textDecoration: 'line-through', textDecorationColor: 'red' }}>199</span> <span style={{ fontSize: '0.875rem' }}>USD</span>
   </p>
 </div>
@@ -47,7 +47,7 @@ const HeroSection = () => {
           </div>
 
           {/* CTA Button */}
-          <button className="bg-white text-blue-600 hover:bg-gray-200 font-sharp py-3 px-6 rounded-xl text-lg w-fit">
+          <button style={{fontFamily:'SharpGrotesk-Medium20'}} className="bg-white text-blue-600 hover:bg-gray-200 py-3 px-9 rounded-xl  ">
             Pre-Book Course
           </button>
         </div>

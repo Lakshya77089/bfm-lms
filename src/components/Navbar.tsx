@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState } from 'react';  
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 

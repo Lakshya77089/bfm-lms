@@ -229,9 +229,39 @@
 }
 
 @font-face {
-  font-family: 'MyFont-Regular';
-  src: url('/fonts/SharpGrotesk-Black25.otf') format('opentype');
-  font-weight: 400;
+  font-family: 'SharpGrotesk-Book25';
+  src: url('/fonts/Sharp_Grotesk/SharpGrotesk-Book25.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SharpGrotesk-Medium25';
+  src: url('/fonts/Sharp_Grotesk/SharpGrotesk-Medium25.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SharpGrotesk-Medium20';
+  src: url('/fonts/Sharp_Grotesk/SharpGrotesk-Medium15.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SharpGrotesk-Book20';
+  src: url('/fonts/Sharp_Grotesk/SharpGrotesk-Book20.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SharpGrotesk-Light20';
+  src: url('/fonts/Sharp_Grotesk/SharpGrotesk-Light20.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SharpGrotesk-SemiBold20';
+  src: url('/fonts/Sharp_Grotesk/SharpGrotesk-SemiBold15.otf') format('opentype');
+  font-weight: normal;
   font-style: normal;
 }
 
