@@ -2,19 +2,19 @@
 import React, { useState } from 'react';
 import { Suspense } from 'react'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Menu } from 'lucide-react'
+import { ArrowRight} from 'lucide-react'
 import { ConnectButton } from 'thirdweb/react'
 import { client } from '../../actions/wallet'
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const welcomeScreen = {
-		title: 'BFM Academy',
-		subtitle: 'where web3 wizards are made',
-		img: {
-			width: 200,
-			height: 200,
-		},
-	}
+  // const welcomeScreen = {
+	// 	title: 'BFM Academy',
+	// 	subtitle: 'where web3 wizards are made',
+	// 	img: {
+	// 		width: 200,
+	// 		height: 200,
+	// 	},
+	// }
   return (
     <nav className="p-4 bg-white shadow-md">
       <div className="flex items-center justify-between">
