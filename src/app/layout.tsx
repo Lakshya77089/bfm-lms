@@ -5,7 +5,6 @@ import { ThemeProvider } from 'next-themes'
 import { ThirdwebProvider } from 'thirdweb/react'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { Toaster } from 'sonner'
-import { SessionProvider } from "next-auth/react"
 import SessionWrapper from '@/components/SessionWrapper'
 
 const mont = Montserrat({
