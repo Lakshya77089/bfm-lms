@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import { FaGoogle, FaApple, FaEnvelope, FaLock } from "react-icons/fa";
 import Link from "next/link";
@@ -109,20 +108,27 @@ const Login: React.FC = () => {
 
           {/* Social Logins */}
           <div className="space-y-3">
-            <button
-              onClick={() => signIn("google")}
-              type="button"
-              className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-100"
-            >
-              <FaGoogle className="mr-2" /> Continue with Google
-            </button>
-            <button
-              type="button"
-              className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-100"
-            >
-              <FaApple className="mr-2" /> Continue with Apple
-            </button>
-          </div>
+  <button
+  onClick={() =>
+    signIn("google", { callbackUrl: "/" })  // or your dashboard page
+  }
+  type="button"
+  className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-100"
+>
+  <FaGoogle className="mr-2" /> Continue with Google
+</button>
+
+
+  <button
+    onClick={() => signIn("apple",{
+      callbackUrl:"/",
+    })}
+    type="button"
+    className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-100"
+  >
+    <FaApple className="mr-2" /> Continue with Apple
+  </button>
+</div>
         </div>
       </div>
     </div>

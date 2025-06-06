@@ -7,10 +7,10 @@ const HeroSection = () => {
     <section className="bg-black text-white/90 py-6 md:py-0 px-4 md:pl-13 md:pr-0">
       <div className="flex flex-col md:flex-row items-center justify-between gap-5">
         {/* Left Content */}
-        <div className="md:w-[40%] w-full flex flex-col justify-center space-y-4">
+        <div className="md:w-[30%] w-full flex flex-col justify-center space-y-4">
           <h1
   style={{ fontFamily: 'SharpGrotesk-Book25' }}
-  className="text-2xl md:text-4xl font-bold mt-5 leading-relaxed"
+  className="text-2xl md:text-3xl font-bold mt-5 leading-relaxed"
 >
   Enter the Future with <br />
   BFM Academy&apos;s WEB3 <br />
@@ -19,10 +19,10 @@ const HeroSection = () => {
           {/* Price Info */}
           <div>
             <p className="text-2xl md:text-4xl font-sharp">
-              2000 <span className="text-sm font-normal">USD</span>
+              199 <span className="text-sm font-normal">USD</span>
             </p>
             <p className="text-gray-400 text-lg md:text-2xl mt-2">
-              <span className="line-through text-red-500">199</span>{' '}
+              <span className="line-through text-red-500">2000</span>{' '}
               <span className="text-sm">USD</span>
             </p>
           </div>
@@ -63,7 +63,7 @@ const HeroSection = () => {
         </div>
 
         {/* Right Video */}
-<div className="md:w-[60%] w-full h-[300px] md:h-[550px] relative overflow-hidden">
+<div className="md:w-[70%] w-full h-[300px] md:h-[550px] relative overflow-hidden">
   <video
     src="/landpagevideo.mp4"
     autoPlay

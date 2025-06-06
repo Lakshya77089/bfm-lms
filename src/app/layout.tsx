@@ -5,6 +5,8 @@ import { ThemeProvider } from 'next-themes'
 import { ThirdwebProvider } from 'thirdweb/react'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { Toaster } from 'sonner'
+import { SessionProvider } from "next-auth/react"
+import SessionWrapper from '@/components/SessionWrapper'
 
 const mont = Montserrat({
 	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -96,8 +98,10 @@ export default function RootLayout({
 						defaultTheme="dark"
 						disableTransitionOnChange
 					>
+						<SessionWrapper>
 						{children}
 						<Toaster />
+						</SessionWrapper>
 					</ThemeProvider>
 				</ThirdwebProvider>
 			</body>
