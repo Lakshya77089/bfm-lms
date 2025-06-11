@@ -5,7 +5,6 @@ import { ArrowRight, UserCircle } from "lucide-react";
 import { ConnectButton, useActiveAccount } from "thirdweb/react";
 import { client } from "../../actions/wallet";
 import { useSession, signOut } from "next-auth/react";
-import { exit } from "process";
 
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -69,7 +68,7 @@ const Navbar: React.FC = () => {
     const verifyToken = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch("http://localhost:4000/users/verify-token", {
+        await fetch("http://localhost:4000/users/verify-token", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
