@@ -30,8 +30,8 @@ const Login: React.FC = () => {
       }
       localStorage.setItem("token", data.token);
       router.push("/"); 
-    } catch (err) {
-      console.error("Login error:", err);
+    } catch (err:any) {
+      // console.error("Login error:", err);
       setErrorMsg(err.message || "Network Error");
     }
   };
