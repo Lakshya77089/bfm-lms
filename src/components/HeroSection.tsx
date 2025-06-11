@@ -63,7 +63,7 @@ const HeroSection = () => {
         </div>
 
         {/* Right Video */}
-<div className="md:w-[70%] w-full h-[300px] md:h-[550px] relative overflow-hidden">
+<div className="md:w-[70%] w-full h-[300px] md:h-[600px] relative overflow-hidden">
   <video
     src="/landpagevideo.mp4"
     autoPlay

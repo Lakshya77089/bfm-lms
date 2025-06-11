@@ -1,10 +1,41 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { FaGoogle, FaApple, FaEnvelope, FaLock } from "react-icons/fa";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Login: React.FC = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const router = useRouter();
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("http://localhost:4000/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message || "Login failed");
+      }
+      localStorage.setItem("token", data.token);
+      router.push("/"); 
+    } catch (err: any) {
+      console.error("Login error:", err);
+      setErrorMsg(err.message || "Network Error");
+    }
+  };
+
   return (
     <div className="flex min-h-screen bg-white">
       {/* Left Side */}
@@ -39,14 +70,21 @@ const Login: React.FC = () => {
             </div>
           </div>
 
-          {/* Heading */}
+
           <div>
             <h2 className="text-2xl font-bold text-gray-900">Sign In</h2>
             <p className="text-sm text-gray-500">Welcome back!</p>
           </div>
 
+    
+          {errorMsg && (
+            <p className="text-sm text-red-600 bg-red-50 p-2 rounded">
+              {errorMsg}
+            </p>
+          )}
+
           {/* Form */}
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleLogin}>
             {/* Email Field */}
             <div>
               <label
@@ -60,8 +98,11 @@ const Login: React.FC = () => {
                 <input
                   id="email"
                   type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
                   className="w-full focus:outline-none text-gray-900"
+                  required
                 />
               </div>
             </div>
@@ -79,12 +120,15 @@ const Login: React.FC = () => {
                 <input
                   id="password"
                   type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
                   className="w-full focus:outline-none text-gray-900"
+                  required
                 />
               </div>
               <div className="text-right mt-1">
-                <a href="#" className="text-sm text-indigo-600 hover:underline">
+                <a href="/forgatpassword" className="text-sm text-indigo-600 hover:underline">
                   Forgot password?
                 </a>
               </div>
@@ -108,27 +152,21 @@ const Login: React.FC = () => {
 
           {/* Social Logins */}
           <div className="space-y-3">
-  <button
-  onClick={() =>
-    signIn("google", { callbackUrl: "/" })  // or your dashboard page
-  }
-  type="button"
-  className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-100"
->
-  <FaGoogle className="mr-2" /> Continue with Google
-</button>
-
-
-  <button
-    onClick={() => signIn("apple",{
-      callbackUrl:"/",
-    })}
-    type="button"
-    className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-100"
-  >
-    <FaApple className="mr-2" /> Continue with Apple
-  </button>
-</div>
+            <button
+              onClick={() => signIn("google", { callbackUrl: "/" })}
+              type="button"
+              className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-100"
+            >
+              <FaGoogle className="mr-2" /> Continue with Google
+            </button>
+            <button
+              onClick={() => signIn("apple", { callbackUrl: "/" })}
+              type="button"
+              className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-100"
+            >
+              <FaApple className="mr-2" /> Continue with Apple
+            </button>
+          </div>
         </div>
       </div>
     </div>
