@@ -128,7 +128,7 @@ const Login: React.FC = () => {
                 />
               </div>
               <div className="text-right mt-1">
-                <a href="/forgatpassword" className="text-sm text-indigo-600 hover:underline">
+                <a className="text-sm text-indigo-600 hover:underline">
                   Forgot password?
                 </a>
               </div>
