@@ -54,6 +54,7 @@ const Register: React.FC = () => {
         alert("Registration successful! Please login.");
       }
     } catch (err) {
+      console.log(err);
       setError("Network error. Please try again.");
     } finally {
       setLoading(false);
