@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState, Suspense } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, UserCircle } from "lucide-react";
+import { ArrowRight, UserCircle, ChevronDown } from "lucide-react";
 import { ConnectButton, useActiveAccount } from "thirdweb/react";
 import { client } from "../../actions/wallet";
 import { useSession, signOut } from "next-auth/react";
@@ -18,12 +18,13 @@ const Navbar: React.FC = () => {
     walletAddress?: string;
   } | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const account = useActiveAccount();
 
   const registerWallet = async (walletAddress: string) => {
     setIsLoading(true);
     try {
-      const token = localStorage.getItem("token"); 
+      const token = localStorage.getItem("token");
       const response = await fetch("http://localhost:4000/users/wallet", {
         method: "POST",
         headers: {
@@ -60,36 +61,34 @@ const Navbar: React.FC = () => {
     }
   };
 
-
   useEffect(() => {
-  const token = localStorage.getItem("token"); 
+    const token = localStorage.getItem("token");
 
-  if (token) {
-    const verifyToken = async () => {
-      setIsLoading(true);
-      try {
-        await fetch("http://localhost:4000/users/verify-token", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-      } catch (error) {
-        console.error("Token verification error:", error);
-        setIsAuthenticated(false);
-        setUserData(null);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    verifyToken();
-  } else {
-    setIsAuthenticated(false);
-    setUserData(null);
-  }
-}, []);
-
+    if (token) {
+      const verifyToken = async () => {
+        setIsLoading(true);
+        try {
+          await fetch("http://localhost:4000/users/verify-token", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        } catch (error) {
+          console.error("Token verification error:", error);
+          setIsAuthenticated(false);
+          setUserData(null);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      verifyToken();
+    } else {
+      setIsAuthenticated(false);
+      setUserData(null);
+    }
+  }, []);
 
   // Register wallet when connected
   useEffect(() => {
@@ -102,57 +101,54 @@ const Navbar: React.FC = () => {
     if (status === "authenticated") {
       signOut({ callbackUrl: "/" });
     }
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setIsAuthenticated(false);
     setUserData(null);
- 
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Combine NextAuth and custom authentication
   const isUserAuthenticated = status === "authenticated" || isAuthenticated;
   // const isUserAddress = status === "address" || account?.address
 
   return (
-    <nav className="p-4 bg-white shadow-md relative z-50">
+    <nav
+      className={`fixed top-0 left-0 w-full bg-white shadow-md z-50 transition-all duration-800 ${
+        scrolled ? "py-2" : "py-4"
+      } px-3`}
+    >
       <div className="flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center ml-2 md:ml-10">
-          <img src="/blue_bfm_logo.png" alt="Logo" className="h-8 w-8 mr-2" />
-          <span className="text-2xl text-black font-extrabold tracking-wide">
-            academy
-          </span>
-        </div>
-
-        {/* Desktop Links */}
-        <div className="hidden md:flex items-center space-x-3 relative">
-          {isLoading ? (
-            <div>Loading...</div>
-          ) : !isUserAuthenticated ? (
-            <>
-              <a
-                href="/login"
-                className="text-blue-700 font-semibold hover:underline text-base"
-              >
-                Log in
-              </a>
-              <a
-                href="/register"
-                className="bg-blue-700 text-white rounded-md px-5 py-2 font-semibold hover:bg-blue-800 transition text-base"
-              >
-                Sign up
-              </a>
-            </>
-          ) : null}
+        <div className="flex ">
+          <div className="flex items-center ml-2 md:ml-5">
+            <img src="/blue_bfm_logo.png" alt="Logo" className="h-8 w-8 mr-2" />
+            <span className="text-2xl text-black font-extrabold tracking-wide">
+              academy
+            </span>
+          </div>
 
           {/* Web3 Library Dropdown */}
-          <div className="relative group">
+          <div className="relative group mt-1 ml-10">
             <button
               type="button"
-              className="text-blue-700 font-semibold border border-blue-700 px-4 py-2 rounded-md hover:bg-blue-700 hover:text-white transition text-base"
+              className="text-black font-medium px-4 py-2 rounded-md hover:text-blue-700 transition text-base flex items-center gap-1"
             >
-              Web3 Library
+              Web3 Library <ChevronDown className="w-4 h-4" />
             </button>
-            <div className="absolute right-0 mt-2 w-72 max-w-[calc(100vw-2rem)] bg-white border border-gray-300 rounded-lg shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-opacity duration-300 z-50 p-4 space-y-3">
+
+            <div className="absolute left-0 mt-2 w-72 max-w-[calc(100vw-2rem)] bg-white border border-gray-300 rounded-lg shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-opacity duration-300 z-50 p-4 space-y-3">
               <a
                 href="/library/books"
                 className="block rounded-lg px-4 py-3 hover:bg-gray-100 transition flex justify-between items-center"
@@ -181,6 +177,27 @@ const Navbar: React.FC = () => {
               </a>
             </div>
           </div>
+        </div>
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center space-x-3 relative">
+          {isLoading ? (
+            <div>Loading...</div>
+          ) : !isUserAuthenticated ? (
+            <>
+              <a
+                href="/login"
+                className="text-black rounded-md px-3 py-2 font-normal hover:text-blue-700 transition text-base"
+              >
+                Log in
+              </a>
+              <a
+                href="/register"
+                className="text-black rounded-md px-3 py-2 font-normal hover:text-blue-700 transition text-base"
+              >
+                Sign up
+              </a>
+            </>
+          ) : null}
 
           {/* Connect Wallet Button */}
           <Suspense
@@ -196,7 +213,7 @@ const Navbar: React.FC = () => {
               </Button>
             }
           >
-            <div className="!bg-white border-2 border-blue-700 rounded scale-90">
+            <div className=" scale-90">
               <ConnectButton
                 client={client}
                 connectButton={{
@@ -211,7 +228,7 @@ const Navbar: React.FC = () => {
                     ? "Switch Wallet"
                     : "Connect Wallet",
                   className:
-                    "!bg-white text-blue-700 font-semibold px-4 py-2 rounded-md border border-blue-700 hover:bg-blue-50 transition",
+                    "!bg-blue-700 !text-white font-bold px-4 py-2 rounded-md border border-blue-700 hover:bg-blue transition",
                 }}
                 connectModal={{
                   title: "Get started with BFMAcademy",
@@ -224,7 +241,7 @@ const Navbar: React.FC = () => {
           </Suspense>
 
           {/* Profile icon and dropdown for authenticated user */}
-          {isUserAuthenticated &&  (
+          {isUserAuthenticated && (
             <div className="relative">
               <button
                 onClick={() => setProfileOpen(!profileOpen)}

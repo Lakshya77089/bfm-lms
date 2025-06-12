@@ -1,28 +1,55 @@
-'use client';
-import Image from 'next/image';
-import React from 'react';
+"use client";
+import Image from "next/image";
+import React, { useState } from "react";
 
 const HeroSection = () => {
+  const [loading, setLoading] = useState(false);
+  const handlePreBook = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("http://localhost:4000/users/createOrder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          product_id: "COURSE123",
+          price: 200,
+          currency: "USD",
+          title: "Pre-Book My Next Course",
+        }),
+      });
+      const { payment_url } = await res.json();
+      if (payment_url) {
+        window.location.href = payment_url;
+      } else {
+        throw new Error("No payment URL returned");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Failed to initiate payment. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
-    <section className="bg-black text-white/90 py-6 md:py-0 px-4 md:pl-13 md:pr-0">
+    <section className="md:pt-18 pt-20 bg-black text-white/90 py-6 md:py-0 px-4 md:pl-13 md:pr-0">
       <div className="flex flex-col md:flex-row items-center justify-between gap-5">
         {/* Left Content */}
         <div className="md:w-[30%] w-full flex flex-col justify-center space-y-4">
           <h1
-  style={{ fontFamily: 'SharpGrotesk-Book25' }}
-  className="text-2xl md:text-3xl font-bold mt-5 leading-relaxed"
->
-  Enter the Future with <br />
-  BFM Academy&apos;s WEB3 <br />
-  Master-course
-</h1>
+            style={{ fontFamily: "SharpGrotesk-Book25" }}
+            className="text-2xl md:text-3xl font-bold mt-5 leading-relaxed"
+          >
+            Enter the Future with <br />
+            BFM Academy&apos;s WEB3 <br />
+            Master-course
+          </h1>
           {/* Price Info */}
           <div>
             <p className="text-2xl md:text-4xl font-sharp">
               199 <span className="text-sm font-normal">USD</span>
             </p>
-            <p className="text-gray-400 text-lg md:text-2xl mt-2">
-              <span className="line-through text-red-500">2000</span>{' '}
+            <p className="text-gray-400 text-lg md:text-2xl mt-1">
+              <span className="line-through text-red-500">2000</span>{" "}
               <span className="text-sm">USD</span>
             </p>
           </div>
@@ -55,26 +82,26 @@ const HeroSection = () => {
 
           {/* CTA Button */}
           <button
-            style={{ fontFamily: 'SharpGrotesk-Medium20' }}
+            onClick={handlePreBook}
+            disabled={loading}
+            style={{ fontFamily: "SharpGrotesk-Medium20" }}
             className="bg-white text-blue-600 hover:bg-gray-200 mt-5 mb-5 py-3 px-9 rounded-xl w-fit"
           >
-            Pre-Book Course
+            {loading ? "Redirecting..." : "Pre-Book Course"}
           </button>
         </div>
 
         {/* Right Video */}
-<div className="md:w-[70%] w-full h-[300px] md:h-[600px] relative overflow-hidden">
-  <video
-    src="/landpagevideo.mp4"
-    autoPlay
-    muted
-    loop
-    playsInline
-    className="w-full h-full object-cover"
-  />
-</div>
-
-
+        <div className="md:w-[70%] w-full h-[300px] md:h-[600px] relative overflow-hidden">
+          <video
+            src="/landpagevideo.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          />
+        </div>
       </div>
     </section>
   );
